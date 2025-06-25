@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midis Marketing</title>
+  <link rel="icon" type="image/png" href="./image/midis m final logo-03.png">
+ 
+  <link rel="stylesheet" href="./services.css" />
+</head>
+
+ 
+<body>
+  <!-- Navbar with Book a Call button -->
+
+  <div class="nav-container">
+    <nav class="navbar">
+      <div class="nav-container">
+       <div class="logo">
+          <a href="./index.html"><img src="./image/midis final logo-01.png" height="80px"></a> 
+    </div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+
+        <div class="nav-links" id="nav-links">
+          <a href="./index.html">Home</a>
+          <a href="./services.html">Services</a>
+          <a href="aboutus.html">About</a>
+          <a href="contactus.html">Contact</a>
+          <a href="#" id="openPopup">Book a Meeting</a>
+           <a href="login.html" class="btn login-btn">Login</a>
+          <a href="signup.html" class="btn register-btn">Register</a>
+          <button id="logoutBtn" class="btn" style="display:none;">Logout</button>
+        </div>
+      </div>
+    </nav>
+    </div>
+
+  <!-- Popup Overlay -->
+  <div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close-btn" aria-label="Close popup">×</button>
+
+    <div class="popup">
+      <!-- Left side -->
+      <div class="left">
+        <h2 id="popupTitle">Book a Free Strategy Meeting</h2>
+        <h3>midis</h3>
+        <p>Digital Growth Expert</p>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Your Name" required />
+        <label for="contact">Your Contact</label>
+        <input type="text" id="contact" placeholder="Your Contact Number" required />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <!-- Timezone Selection -->
+        <label for="timezone">Select Time Zone</label>
+        <select id="timezone" required>
+          <option value="">Select Time Zone</option>
+          <option value="IST">IST (Indian Standard Time)</option>
+          <option value="EST">EST (Eastern Standard Time)</option>
+          <option value="PST">PST (Pacific Standard Time)</option>
+        </select>
+
+        <button id="submitBooking" disabled>Confirm Booking</button>
+
+
+      </div>
+
+      <!-- Right side -->
+      <div class="right">
+        <div class="calendar-head">
+          <button class="nav-btn" id="prevMonthBtn" aria-label="Previous month">←</button>
+          <span id="monthYear">Month Year</span>
+          <button class="nav-btn" id="nextMonthBtn" aria-label="Next month">→</button>
+        </div>
+
+        <div class="calendar-grid" id="calendarDays">
+          <!-- Day labels and dates inserted here -->
+        </div>
+
+        <div class="time-slots" id="slots">
+          <!-- Time slots inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<section class="midis-services">
+  <h2>🚀 Our Digital Marketing Services</h2>
+  <div class="services-grid">
+    <!-- Repeat this block for each of the 12 services -->
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #ff6a00, #ee0979);">
+      <div class="icon">💻</div>
+      <h3>Web Development</h3>
+      <p>Stunning, responsive websites tailored to convert visitors into customers.</p>
+      <a href="./web.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #6a11cb, #2575fc);">
+      <div class="icon">🎨</div>
+      <h3>Graphic Design</h3>
+      <p>Logos, social media posts, and branding that reflect your identity.</p>
+           <a href="./graphic.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #00c9ff, #92fe9d);">
+      <div class="icon">✍️</div>
+      <h3>Content Creation</h3>
+      <p>Blogs, captions, and ad copies that align with your brand voice.</p>
+           <a href="./content.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #f7971e, #ffd200);">
+      <div class="icon">🎥</div>
+      <h3>Video Editing</h3>
+      <p>Reels, ads, and long-form videos that captivate and engage.</p>
+           <a href="./videoedit.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #f953c6, #b91d73);">
+      <div class="icon">📺</div>
+      <h3>YouTube Management</h3>
+      <p>We grow and manage your YouTube presence from zero to hero.</p>
+        <a href="./youtube.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #43e97b, #38f9d7);">
+      <div class="icon">📈</div>
+      <h3>SEO</h3>
+      <p>Rank higher on Google and attract organic traffic effortlessly.</p>
+           <a href="./seo.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #ff5f6d, #ffc371);">
+      <div class="icon">📧</div>
+      <h3>Email Marketing</h3>
+      <p>Automated campaigns that convert and retain your customers.</p>
+            <a href="./email.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #fc466b, #3f5efb);">
+      <div class="icon">🔍</div>
+      <h3>Google Ads</h3>
+      <p>Get more clicks, leads, and sales with optimized PPC campaigns.</p>
+           <a href="./googleadd.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #00f2fe, #4facfe);">
+      <div class="icon">📱</div>
+      <h3>Meta Ads</h3>
+      <p>High-ROI Facebook and Instagram ads targeting your audience.</p>
+            <a href="./meta.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #5ee7df, #b490ca);">
+      <div class="icon">🔗</div>
+      <h3>LinkedIn Ads</h3>
+      <p>Lead-gen focused ads for serious B2B growth.</p>
+      <a href="./linkedln.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #ffe259, #ffa751);">
+      <div class="icon">📊</div>
+      <h3>Organic Growth</h3>
+      <p>Grow your social reach and followers — no ads, pure strategy.</p>
+     <a href="./organic.html"><button class="explore-btn">Explore</button></a>
+    </div>
+
+    <div class="service-card" style="--cardColor: linear-gradient(135deg, #d9a7c7, #fffcdc);">
+      <div class="icon">🛒</div>
+      <h3>E-Commerce Strategy</h3>
+      <p>Shopify, WooCommerce, Wix — we optimize & scale online stores.</p>
+  <a href="./e-commerce.html"><button class="explore-btn">Explore</button></a>
+    </div>
+  </div>
+</section>
+
+
+
+
+  
+  <footer class="site-footer">
+    <div class="footer-columns">
+<div class="footer-col">
+        <h4>Our Top Service</h4>
+        <ul>
+          <li>Web Designing & Development</li>
+          <li>Graphic Design</li>
+          <li>Content Creation</li>
+          <li>Video Editing</li>
+          <li>Graphic Designing</li>
+          <li>YouTube Channel Management</li>
+          <li>SEO</li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li>Terms & Conditions</li>
+          <li><a href="aboutus.html">About Us</a></li>
+           <li><a href="./blog.html">blogs</a></li>
+        <li>  <a href="https://docs.google.com/document/d/1Dbk7dFd4dJai-ijn_q0VbB22suLX2Q58mD_jFmuxueA/edit?usp=sharing">Privacy Policy</li></a>
+     
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+         <li>🇺🇸 +1 (862)295-0117</li>
+          <li>🇮🇳 +91 9779320626</li>
+          <li>
+            1st Floor, E 279, Industrial Area,<br />
+            Sector 75, S.A.S Nagar, Punjab<br />
+            160055
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Google Map Embed -->
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.609156489608!2d76.70016831512635!3d30.700369281649323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feeff6b429fbf%3A0x9c347027da3fbcdf!2sTech%20Savy%20Crew%20-%20Top%20SEO%20Agency%20Mohali!5e0!3m2!1sen!2sin!4v1689003576093!5m2!1sen!2sin"
+        width="100%" height="250" style="border: 0" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="footer-bottom">
+     <p>Info@miningdiscovery.com 2025. All Rights Reserved.</p>
+    </div>
+
+
+
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <script src="services.js"> </script>
+
+
+
+
+
+</body>
+<html>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Book Calls - Midis Resources</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #111827; /* dark slate */
+      --accent-color: #111827;  /* match header color */
+      --bg-color: #fefefe;
+      --table-bg: #ffffff;
+      --alt-row: #f9fafb;
+      --text-color: #1f2937;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    nav {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .brand {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--table-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: var(--text-color);
+    }
+
+    .btn-refresh {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .btn-refresh:hover {
+      background-color: #000000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--table-bg);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--alt-row);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 15px;
+      }
+
+      table {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">Midis Resources Admin</div>
+  </nav>
+
+  <div class="container">
+    <h1>Manage Book Calls</h1>
+    <button class="btn-refresh" id="refreshBtn">Refresh List</button>
+
+    <table id="bookcallsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Service</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Book call rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="manage-bookcalls.js"></script>
+</body>
+</html>

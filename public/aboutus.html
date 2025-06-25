@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us</title>
+  <link rel="icon" type="image/png" href="./image/midis m final logo-03.png">
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   <link rel="stylesheet" href="./about.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="nav-container">
+    <nav class="navbar">
+      <div class="nav-container">
+       <div class="logo">
+          <a href="./index.html"><img src="./image/midis final logo-01.png" height="80px"></a> 
+    </div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+
+        <div class="nav-links" id="nav-links">
+          <a href="./index.html">Home</a>
+          <a href="./services.html">Services</a>
+          <a href="aboutus.html">About</a>
+          <a href="contactus.html">Contact</a>
+          <a href="#" id="openPopup">Book a Meeting</a>
+          <a href="login.html" class="btn login-btn">Login</a>
+          <a href="signup.html" class="btn register-btn">Register</a>
+          <button id="logoutBtn" class="btn" style="display:none;">Logout</button>
+        </div>
+      </div>
+    </nav>
+    </div>
+<!-- Popup Overlay -->
+    <div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+      <button class="close-btn" aria-label="Close popup">×</button>
+
+      <div class="popup">
+        <!-- Left side -->
+        <div class="left">
+          <h2 id="popupTitle">Book a Free Strategy Meeting</h2>
+          <h3>midis</h3>
+          <p>Digital Growth Expert</p>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Your Name" required />
+          <label for="contact">Your Contact</label>
+          <input type="text" id="contact" placeholder="Your Contact Number" required />
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+          <!-- Timezone Selection -->
+          <label for="timezone">Select Time Zone</label>
+          <select id="timezone" required>
+            <option value="">Select Time Zone</option>
+            <option value="IST">IST (Indian Standard Time)</option>
+            <option value="EST">EST (Eastern Standard Time)</option>
+            <option value="PST">PST (Pacific Standard Time)</option>
+          </select>
+
+          <button id="submitBooking" disabled>Confirm Booking</button>
+
+          
+        </div>
+
+        <!-- Right side -->
+        <div class="right">
+          <div class="calendar-head">
+            <button class="nav-btn" id="prevMonthBtn" aria-label="Previous month">←</button>
+            <span id="monthYear">Month Year</span>
+            <button class="nav-btn" id="nextMonthBtn" aria-label="Next month">→</button>
+          </div>
+
+          <div class="calendar-grid" id="calendarDays">
+            <!-- Day labels and dates inserted here -->
+          </div>
+
+          <div class="time-slots" id="slots">
+            <!-- Time slots inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Hero Section -->
+<section class="about-hero-modern">
+  <div class="hero-content">
+    <h1>About Us</h1>
+    <p class="tagline">Crafting powerful digital experiences since 2022.</p>
+
+    <p>We don’t just market brands — we build them from the ground up.</p>
+    <p>At Midis Resources, we fuse creativity with technology to create campaigns, platforms, and strategies that elevate businesses globally.</p>
+    <p>From branding to performance marketing, we’re your all-in-one digital growth partner.</p>
+
+   
+
+    <a href="./services.html" class="cta-btn">Explore Our Services</a>
+  </div>
+
+  <div class="gradient-circle"></div>
+</section>
+
+
+
+  <!-- Who We Are -->
+  <section class="who-we-are-fullscreen">
+  <div class="wrapper">
+    <div class="text-area">
+      <h3>Who We Are</h3>
+      <div class="point">
+        <span class="icon">🚀</span>
+        <p><strong>Midis Resources</strong> empowers brands with 360° creative & technical digital solutions.</p>
+      </div>
+      <div class="point">
+        <span class="icon">🎯</span>
+        <p>We drive growth through <strong>performance marketing & ecommerce strategies</strong>.</p>
+      </div>
+      <div class="point">
+        <span class="icon">🤝</span>
+        <p>Our team of <strong>top-tier experts</strong> collaborates closely with clients for real ROI.</p>
+      </div>
+    </div>
+    <div class="image-area">
+      <div class="bg-shape"></div>
+      <img src="image/new.jpg" alt="Creative Team" />
+    </div>
+  </div>
+</section>
+  <!-- CTA Full Width -->
+  <section class="cta-banner">
+    <h2>Your Digital Growth Partner for Sustainable<br><span>Success and Scalable Impact</span></h2>
+    <p>At Midis Resources, we combine proven strategies with innovative solutions to deliver affordable, result-driven digital marketing services.</p>
+    <a href="contactus.html">Talk With Us Now</a>
+  </section>
+
+  <!-- 3 Full-Width Image Cards -->
+  <!-- <section class="image-row">
+    <img src="image/card1.png" alt="Card Image 1">
+    
+    <img src="image/card2.png" alt="Card Image 2">
+    <img src="image/card3.png" alt="Card Image 3">
+  </section> -->
+  <section class="consultation-section1">
+    <div class="content1">
+      <h1>Digital Services</h1> 
+      <h2>That Drive Real Business Growth</h2>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <img src="./image/card1.jpg" alt="Card 1" />
+        <h3>Customized Solutions</h3>
+        <p>We tailor our technology to fit your mining needs and challenges.</p>
+      </div>
+      <div class="card">
+        <img src="./image/card2.jpg" alt="Card 2" />
+        <h3>Expert Guidance</h3>
+        <p>Our team of mining experts helps optimize operations and safety.</p>
+      </div>
+      <div class="card">
+        <img src="./image/card3.jpg" alt="Card 3" />
+        <h3>Advanced Technology</h3>
+        <p>Utilize our smart mining glasses for real-time data insights.</p>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a href="services.html" class="btn">Explore More</a>
+    </div>
+  </section>
+
+  <!-- Unique Qualities -->
+  <section class="section">
+    <h2 class="highlighted-heading">Our Unique Qualities</h2>
+    <p class="paragraph">We stand out from the competition with our unique blend of expertise, global reach, and client-centric approach.</p>
+    <div class="card-container">
+      <div class="card">
+        <i class="fas fa-globe icon"></i>
+        <h4>Global Reach</h4>
+        <p>We operate on a global scale, helping businesses reach their target audiences worldwide.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-users icon"></i>
+        <h4>Experienced Team</h4>
+        <p>Our team comprises seasoned professionals with a proven track record in digital marketing.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-file-alt icon"></i>
+        <h4>Transparent Reporting</h4>
+        <p>We provide clear and comprehensive reports, keeping you informed every step of the way.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-filter icon"></i>
+        <h4>Customized Funnels</h4>
+        <p>We design and implement customized marketing funnels tailored to your specific business goals.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-handshake icon"></i>
+        <h4>Long-Term Partnership</h4>
+        <p>We're not just a service provider; we’re your long-term partner, invested in your success.</p>
+      </div>
+    </div>
+  </section>
+  <!-- form -->
+   
+ <!-- Contact Form -->
+     <section class="container">
+   
+    <div class="right">
+      <h2>Book A <span class="highlight">Consultation</span></h2>
+      <p>Partner with a leading digital marketing agency that understands your goals and delivers proven results.</p>
+
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name *" required />
+        <input type="email" name="email" placeholder="Your Email *" required />
+        <input type="tel" name="phone" placeholder="Phone Number" />
+        <select name="serviceProposal" required>
+          <option value="" disabled selected>Select a Service *</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Graphic Design">Graphic Design</option>
+          <option value="Content Creation">Content Creation</option>
+          <option value="Video Editing">Video Editing</option>
+          <option value="YouTube Channel Setup & Management">YouTube Channel Setup & Management</option>
+          <option value="SEO (Search Engine Optimisation)">SEO (Search Engine Optimisation)</option>
+          <option value="Email Marketing">Email Marketing</option>
+          <option value="Google Ads (PPC)">Google Ads (PPC)</option>
+          <option value="Meta Ads (Facebook & Instagram)">Meta Ads (Facebook & Instagram)</option>
+          <option value="LinkedIn Ads">LinkedIn Ads</option>
+        </select>
+        <textarea name="message" placeholder="Your Message *" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formResponse"></p>
+    </div>
+  </section>
+
+
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-columns">
+<div class="footer-col">
+        <h4>Our Top Service</h4>
+        <ul>
+          <li>Web Designing & Development</li>
+          <li>Graphic Design</li>
+          <li>Content Creation</li>
+          <li>Video Editing</li>
+          <li>Graphic Designing</li>
+          <li>YouTube Channel Management</li>
+          <li>SEO</li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li>Terms & Conditions</li>
+          <li><a href="aboutus.html">About Us</a></li>
+           <li><a href="./blog.html">blogs</a></li>
+         <li>  <a href="https://docs.google.com/document/d/1Dbk7dFd4dJai-ijn_q0VbB22suLX2Q58mD_jFmuxueA/edit?usp=sharing">Privacy Policy</li></a>
+     
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+           <li>🇺🇸 +1 (862)295-0117</li>
+          <li>🇮🇳 +91 9779320626</li>
+          <li>1st Floor, E 279, Industrial Area,<br>Sector 75, S.A.S Nagar, Punjab<br>160055</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.609156489608!2d76.70016831512635!3d30.700369281649323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feeff6b429fbf%3A0x9c347027da3fbcdf!2sTech%20Savy%20Crew%20-%20Top%20SEO%20Agency%20Mohali!5e0!3m2!1sen!2sin!4v1689003576093!5m2!1sen!2sin"
+      width="100%" height="250" style="border:0;" allowfullscreen=""
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+    <div class="footer-bottom">
+     <p>Info@miningdiscovery.com 2025. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+ 
+<script src="aboutus.js"></script>
+</body>
+</html>

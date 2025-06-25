@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Messages - Midis Resources</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #111827;
+      --accent-color: #6366f1; /* indigo for contrast */
+      --bg-light: #f9fafb;
+      --white: #ffffff;
+      --gray: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--primary-color);
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 10px 18px;
+      background-color: var(--primary-color);
+      color: var(--accent-color);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    a.back-link:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--white);
+    }
+
+    thead {
+      background-color: var(--primary-color);
+      color: var(--accent-color);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    th, td {
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    tbody tr:hover {
+      background-color: #f3f4f6;
+    }
+
+    tbody tr.loading td {
+      text-align: center;
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      tbody tr {
+        margin-bottom: 18px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 15px;
+      }
+
+      tbody td {
+        padding: 10px 0;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--gray);
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="admin-dashboard.html" class="back-link">&larr; Back to Dashboard</a>
+    <h1>Contact Messages</h1>
+    <table id="contactMessagesTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Service Proposal</th>
+          <th>Message</th>
+          <th>Submitted At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="loading">
+          <td colspan="6">Loading messages...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="messages.js"></script>
+</body>
+
+</html>

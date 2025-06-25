@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #111;
+  padding: 20px 40px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-transform: lowercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff8c42;
+}
+
+.btn {
+  background: linear-gradient(90deg, #ff6a3d, #ffbe2e);
+  padding: 10px 18px;
+  border-radius: 30px;
+  color: #111;
+  font-weight: bold;
+}
+
+section {
+  height: 100vh;
+  padding: 60px;
+  border-bottom: 1px solid #333;
+}
+
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Midis Style Navbar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">midis</div>
+      <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="#explore" class="btn">Explore Our Work</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Placeholder sections -->
+  <section id="home"><h1>Home</h1></section>
+  <section id="services"><h1>Services</h1></section>
+  <section id="about"><h1>About</h1></section>
+  <section id="work"><h1>Work</h1></section>
+  <section id="contact"><h1>Contact</h1></section>
+
+  <script>
+    const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a:not(.btn)");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 70;
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
+
+</body>
+</html>

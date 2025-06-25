@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midis Clone</title>
+<link rel="icon" type="image/png" href="image/midis final 2.png" > 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+
+</head>
+
+<body>
+  <div class="nav-container">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="./index.html"><img src="./image/midis final logo-01.png" height="80px"></a>
+        </div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+
+        <div class="nav-links" id="nav-links">
+          <a href="./index.html">Home</a>
+          <a href="./services.html">Services</a>
+          <a href="aboutus.html">About</a>
+          <a href="contactus.html">Contact</a>
+          <a href="#" id="openPopup">Book a Meeting</a>
+          <a href="login.html" class="btn login-btn">Login</a>
+          <a href="signup.html" class="btn register-btn">Register</a>
+          <button id="logoutBtn" class="btn" style="display:none;">Logout</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- popup-section -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <button class="close-btn2" id="closePopup">&times;</button>
+      <h2>Let’s Grow Together 🚀</h2>
+      <p>Want to take your brand to the next level? Get in touch with our experts today!</p>
+      <a href="./contactus.html" class="cta-btn">Explore Now</a>
+
+    </div>
+  </div>
+
+
+  <!-- Modal Popup -->
+  <div id="popup4" class="popup-overlay">
+    <div class="popup-content">
+      <button class="close-btn3" id="closePopup4">&times;</button>
+      <div class="left-section">
+        <h2>
+          <span class="highlight-orange">Accelerate Your Digital</span><br>
+          Growth Without Expanding<br>
+          <span class="highlight-orange">Your Team</span>
+        </h2>
+        <form id="bookCallForm">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="tel" name="contactNumber" placeholder="Contact Number" required pattern="[0-9]{10,15}" />
+          <select name="serviceProposal" id="serviceDropdown" required>
+            <option value="" disabled selected>Select a Service</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Content Creation">Content Creation</option>
+            <option value="Video Editing">Video Editing</option>
+            <option value="YouTube Channel Setup & Management">YouTube Channel Setup & Management</option>
+            <option value="SEO (Search Engine Optimisation)">SEO (Search Engine Optimisation)</option>
+            <option value="Email Marketing">Email Marketing</option>
+            <option value="Google Ads (PPC)">Google Ads (PPC)</option>
+            <option value="Meta Ads (Facebook & Instagram)">Meta Ads (Facebook & Instagram)</option>
+            <option value="LinkedIn Ads">LinkedIn Ads</option>
+          </select>
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div id="thankYouMsg" class="thank-you-message" style="display: none;">
+          Thank you for booking a call! We'll be in touch shortly.
+        </div>
+      </div>
+      <div class="right-section"></div>
+    </div>
+  </div>
+
+  <!-- booka meeting -->
+  <div id="popupOverlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <button class="close-btn" aria-label="Close popup">×</button>
+
+    <div class="popup">
+      <!-- Left side -->
+      <div class="left">
+        <h2 id="popupTitle">Book a Free Strategy Meeting</h2>
+        <h3>midis</h3>
+        <p>Digital Growth Expert</p>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Your Name" required />
+        <label for="contact">Your Contact</label>
+        <input type="text" id="contact" placeholder="Your Contact Number" required />
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <!-- Timezone Selection -->
+        <label for="timezone">Select Time Zone</label>
+        <select id="timezone" required>
+          <option value="">Select Time Zone</option>
+          <option value="IST">IST (Indian Standard Time)</option>
+          <option value="EST">EST (Eastern Standard Time)</option>
+          <option value="PST">PST (Pacific Standard Time)</option>
+        </select>
+
+        <button id="submitBooking" disabled>Confirm Booking</button>
+
+
+      </div>
+
+      <!-- Right side -->
+      <div class="right">
+        <div class="calendar-head">
+          <button class="nav-btn" id="prevMonthBtn" aria-label="Previous month">←</button>
+          <span id="monthYear">Month Year</span>
+          <button class="nav-btn" id="nextMonthBtn" aria-label="Next month">→</button>
+        </div>
+
+        <div class="calendar-grid" id="calendarDays">
+          <!-- Day labels and dates inserted here -->
+        </div>
+
+        <div class="time-slots" id="slots">
+          <!-- Time slots inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div id="cookiePopup" class="cookie-popup">
+    <div class="cookie-content">
+      <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+      </p>
+      <button id="acceptCookie">Accept</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="leftside">
+      <h3>#<span>
+          Top Rated</span> Digital Agency in INDIA Since 2022</h3>
+
+      <h2>Build Brands. Drive Revenue. <br />Scale Globally</h2>
+
+      <img src="./image/midis final logo-01.png" height="80px">
+
+      <p>From Idea to execution — we offer full-suite creative and digital<br> marketing services tailored for global
+        growth.</p>
+
+      <a href="./services.html"> <button type="button" class="btn">Explore our service</button></a>
+    </div>
+
+    <div class="right-image">
+      <div class="image-box1">
+        <div class="first">
+          <img src="./image/boys.jpg" class="size">
+          <img src="./image/girl3.jpg" class="size4">
+        </div>
+        <div class="sec">
+          <img src="./image/girl.jpg" class="size2">
+          <img src="./image/boys2.jpg" class="size5">
+        </div>
+        <div class="first3">
+          <img src="./image/girl2.jpg" class="size3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- cards-section -->
+  <div class="container2">
+    <section class="services-section">
+      <h2>Digital Services</h2>
+      <h3>That Drive Real Business Growth</h3>
+      <div class="services-container">
+        <div class="service-card">
+          <img src="./image/card1.jpg" alt="Web Developer" />
+          <h3>Web Development</h3>
+          <p>We create fast, mobile-friendly websites that help your business grow,
+            attract,
+            and convert visitors</p>
+          <a href="./web.html"><button class="cta-btn">Explore</button></a>
+        </div>
+        <div class="service-card">
+          <img src="./image/card2.jpg" alt="Graphic Design" />
+          <h3>Graphic Design</h3>
+          <p>We design logos, social media posts, and ads that look professional and
+            represent your brand clearly.</p>
+          <a href="./graphic.html"><button class="cta-btn">Explore</button></a>
+        </div>
+        <div class="service-card">
+          <img src="./image/card3.jpg" alt="Content Creation" />
+          <h3>Content Creation</h3>
+          <p>We write blogs, captions, and ad copy tailored to your brand’s voice and
+            customer interests.
+          </p>
+          <a href="./content.html"><button class="cta-btn">Explore</button></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container3">
+    <section class="about-section">
+      <div class="about-text">
+        <h1>ABOUT US</h1>
+        <h2>
+          Midis Resources –<br />
+          Empowering Digital<br />
+          Growth for Startups &<br />
+          Businesses
+        </h2>
+        <p>
+          We are a results-driven digital agency offering end-to-end creative and technical services.
+          Whether you're launching a new startup or running an established business, we help you build
+          a powerful online presence, drive measurable growth, and expand your reach across global markets.
+        </p>
+        <button class="cta-btn openPopupBtn" data-service="Web Development">Explore now</button>
+      </div>
+      <div class="about-image">
+        <img src="./image/new2.jpg" alt="Team discussion" />
+      </div>
+    </section>
+  </div>
+
+  </div>
+
+  <div class="container4">
+    <section class="why-choose-section">
+      <div class="container">
+        <div class="left">
+          <h2 class="color">Why Choose Us?</h2>
+          <p class="intro">At Midis Resources, we believe in combining strategy, creativity, and performance to deliver
+            real business results. Whether you're a startup, an eCommerce brand, or an international consultancy, our
+            team
+            helps you scale globally with smarter digital marketing solutions.</p>
+          <div class="stats">
+            <div>
+              <h3 class="counter" data-target="3400">0</h3>
+              <p>Hours of work+</p>
+            </div>
+            <div>
+              <h3 class="counter" data-target="210">0</h3>
+              <p>Projects Completed+</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="right">
+          <div class="accordion">
+            <div class="item">
+              <button class="accordion-header">Global Performance-Driven Approach</button>
+              <div class="accordion-body">
+                <p>We craft tailored digital strategies focused on ROI. Our work is built on what actually works in the
+                  USA, Canada, UK & European markets.</p>
+              </div>
+            </div>
+            <div class="item">
+              <button class="accordion-header">Experienced & Diverse Team</button>
+              <div class="accordion-body">
+                <p>Our global talent pool includes top marketers, designers, developers, and ad specialists — all
+                  working
+                  together to deliver high-quality, high-converting campaigns.</p>
+              </div>
+            </div>
+            <div class="item">
+              <button class="accordion-header">Transparency & Real-Time Reporting</button>
+              <div class="accordion-body">
+                <p>No hidden tactics. No vague updates. You get full visibility with real-time dashboards, performance
+                  reports, and weekly updates.</p>
+              </div>
+            </div>
+            <div class="item">
+              <button class="accordion-header">Custom Funnels, Not Templates</button>
+              <div class="accordion-body">
+                <p>We don’t sell pre-built packages. Every funnel, every strategy is custom-built to fit your business
+                  goals and audience behavior.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="container5">
+    <section class="hero-banner">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h1>
+            Turn Your Website Traffic into
+            <span class="orange-gradient">Real Business Growth</span>
+          </h1>
+          <p>
+            We understand every business has unique needs, which is why we create tailored digital</p>
+          <p>marketing solutions designed to convert your online traffic into measurable revenue</p>
+          <p>and scalable growth.Contact us today to start your growth journey.
+          </p>
+          <a href="contactus.html" class="hero-button">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <div class="container6">
+    <section class="rank-sell-form-section">
+      <div class="rank-sell-container">
+        <!-- Left Content -->
+        <div class="rank-sell-left">
+          <img src="image/bg.jpg" alt="Rank Better, Sell More"
+            style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;" />
+        </div>
+
+        <div class="right">
+          <h3> <span class="orange-text">Book A Consultation</span></h3>
+          <p class="subtext">
+            Partner with a leading digital marketing agency that understands your goals and delivers proven results.
+          </p>
+          <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name *" required />
+            <input type="email" name="email" placeholder="Your Email *" required />
+            <input type="tel" name="phone" placeholder="Phone Number" />
+            <select name="serviceProposal" required>
+              <option value="" disabled selected>Select a Service *</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Graphic Design">Graphic Design</option>
+              <option value="Content Creation">Content Creation</option>
+              <option value="Video Editing">Video Editing</option>
+              <option value="YouTube Channel Setup & Management">YouTube Channel Setup & Management</option>
+              <option value="SEO (Search Engine Optimisation)">SEO (Search Engine Optimisation)</option>
+              <option value="Email Marketing">Email Marketing</option>
+              <option value="Google Ads (PPC)">Google Ads (PPC)</option>
+              <option value="Meta Ads (Facebook & Instagram)">Meta Ads (Facebook & Instagram)</option>
+              <option value="LinkedIn Ads">LinkedIn Ads</option>
+            </select>
+            <textarea name="message" placeholder="Your Message *" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <p id="formResponse"></p>
+        </div>
+    </section>
+
+  </div>
+  <div class="container8">
+    <!-- Heading Section -->
+    <section class="team-heading">
+      <h2><span>Meet</span> Our Team</h2>
+      <p class="tagline">We are a group of passionate creators, designers, and strategists helping brands shine.</p>
+    </section>
+
+    <!-- Carousel Section -->
+ <section class="team-section">
+  <div class="carousel-wrapper">
+    <!-- Left Navigation -->
+    <button class="nav prev" id="carouselPrev" data-direction="-1">⟨</button>
+
+    <!-- Carousel Container -->
+    <div class="carousel" id="carousel">
+      <!-- Team Cards -->
+      <div class="team-card">
+        <img src="./image/Sagar Sir-09.png" class="photo" alt="Sagar Bakshi" />
+        <h3>Sagar Bakshi</h3>
+        <p class="role">DIRECTOR</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/sagarbakshi8859/"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/Gaurav Sir-09.png" class="photo" alt="Gaurav Sharma" />
+        <h3>Gaurav Sharma</h3>
+        <p class="role">DIRECTOR</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/gaurav-sharma-5b7464228"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/Untitled design.png" class="photo" alt="Rahul Gehlot" />
+        <h3>Rahul Gehlot</h3>
+        <p class="role">GRAPHIC DESIGNER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/rahul-gehlot-b4066726a/"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/mehul-09.png" class="photo" alt="Mehul" />
+        <h3>Mehul</h3>
+        <p class="role">CONTENT CREATOR</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/mehul-deolke-9452232ab"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/alen-09.png" class="photo" alt="Alin Mishra" />
+        <h3>Alin Mishra</h3>
+        <p class="role">SHOPIFY DEVELOPER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/alin-mishra-9899bb1b8"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/shivani-09.png" class="photo" alt="Shivani Sharma" />
+        <h3>Shivani Sharma</h3>
+        <p class="role">FRONT-END DEVELOPER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/shivani-sharma-a94251261"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/aanchal-09 (1).png" class="photo" alt="Anchal Pal" />
+        <h3>Anchal Pal</h3>
+        <p class="role">FRONT-END DEVELOPER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/anchal-pal-7b4b89242"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/chanda-09.png" class="photo" alt="Chanda" />
+        <h3>Chanda</h3>
+        <p class="role">GRAPHIC DESIGNER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/chanda-angral-0a429a231"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/ojas-09.png" class="photo" alt="Ojasvinny Saini" />
+        <h3>Ojasvinny Saini</h3>
+        <p class="role">GRAPHIC DESIGNER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/ojasvinny-saini-219b5a1aa"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img src="./image/shawyam-09.png" class="photo" alt="Swayam Gandhi" />
+        <h3>Swayam Gandhi</h3>
+        <p class="role">BACKEND DEVELOPER</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/swayam-gandhi-304990309"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Navigation -->
+    <button class="nav next" id="carouselNext" data-direction="1">⟩</button>
+  </div>
+</section>
+
+  </div>
+  <!-- Footer Section -->
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>Our Top Service</h4>
+        <ul>
+          <li>Web Designing & Development</li>
+          <li>Graphic Design</li>
+          <li>Content Creation</li>
+          <li>Video Editing</li>
+          <li>Graphic Designing</li>
+          <li>YouTube Channel Management</li>
+          <li>SEO</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li>Terms & Conditions</li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="./blog.html">blogs</a></li>
+          <li> <a
+              href="https://docs.google.com/document/d/1Dbk7dFd4dJai-ijn_q0VbB22suLX2Q58mD_jFmuxueA/edit?usp=sharing">Privacy
+              Policy</li></a>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>🇺🇸 +1 (862)295-0117</li>
+          <li>🇮🇳 +91 9779320626</li>
+          <li>
+            1st Floor, E 279, Industrial Area,<br />
+            Sector 75, S.A.S Nagar, Punjab<br />
+            160055
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Google Map Embed -->
+    <div class="footer-map">
+    <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.609156489608!2d76.70016831512635!3d30.700369281649323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390feeff6b429fbf%3A0x9c347027da3fbcdf!2sTech%20Savy%20Crew%20-%20Top%20SEO%20Agency%20Mohali!5e0!3m2!1sen!2sin!4v1689003576093!5m2!1sen!2sin"
+  width="100%"
+  height="250"
+  style="border:0;"
+  allowfullscreen
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>Info@miningdiscovery.com 2025. All Rights Reserved.</p>
+    </div>
+  </footer>
+  </footer>
+
+  <!-- Chat Toggle Button -->
+  <button id="openChat">💬 Chat</button>
+
+  <!-- Chat Popup -->
+  <div id="chatPopup">
+    <div id="chatHeader">Chat with us</div>
+    <div id="chatStatus">Connecting...</div>
+    <div id="chatTyping"></div>
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="userMessage" placeholder="Type your message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+  
+<script src="/socket.io/socket.io.js" defer></script>
+<script src="script.js" defer></script>
+
+
+  <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+
+
+</body>
+
+</html>

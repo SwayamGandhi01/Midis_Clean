@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booked Call Details - Midis Resources</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #111827;
+      --accent-color: #6366f1;
+      --bg-light: #f9fafb;
+      --white: #ffffff;
+      --gray: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--primary-color);
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow-x: auto;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      text-align: center;
+      color: var(--primary-color);
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background-color: var(--primary-color);
+      color: var(--accent-color);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    tbody tr:hover {
+      background-color: #f3f4f6;
+    }
+
+    th.sortable {
+      cursor: pointer;
+      position: relative;
+    }
+
+    th.sortable::after {
+      content: '\25B2';
+      position: absolute;
+      right: 10px;
+      font-size: 0.6rem;
+      opacity: 0.5;
+    }
+
+    th.sortable.sorted-asc::after {
+      content: '\25B2';
+      opacity: 1;
+    }
+
+    th.sortable.sorted-desc::after {
+      content: '\25BC';
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      tbody tr {
+        margin-bottom: 16px;
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        padding: 16px;
+      }
+
+      tbody td {
+        padding: 10px 0;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--gray);
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Booked Call Details</h2>
+    <table id="bookCallTable">
+      <thead>
+        <tr>
+          <th class="sortable" data-key="name">Name</th>
+          <th class="sortable" data-key="contact">Contact</th>
+          <th class="sortable" data-key="day">Day</th>
+          <th class="sortable" data-key="month">Month</th>
+          <th class="sortable" data-key="year">Year</th>
+          <th class="sortable" data-key="time">Time</th>
+          <th class="sortable" data-key="timezone">Timezone</th>
+          <th class="sortable" data-key="email">Email</th>
+          <th class="sortable" data-key="submittedAt">Submitted At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated via JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="bookcalls.js"></script>
+</body>
+
+</html>

@@ -53,6 +53,12 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/messages', chatRoutes);
 app.use('/api/bookcalls', bookCallRoutes);
 
+app.get('/api/test-save', async (req, res) => {
+  const Test = mongoose.model('Test', new mongoose.Schema({ msg: String }));
+  await Test.create({ msg: "Hello MongoDB!" });
+  res.send("✅ Data inserted");
+});
+
 // Health Check
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
@@ -197,6 +203,8 @@ Strict Chatbot Rules:
     }
   });
 });
+
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

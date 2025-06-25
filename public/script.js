@@ -697,10 +697,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
 window.addEventListener("load", () => {
   // Show popup every 30 seconds
   // setInterval(() => {

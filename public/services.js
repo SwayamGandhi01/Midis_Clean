@@ -1,7 +1,27 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Menu Toggle
+    document.getElementById("menuToggle").addEventListener("click", function () {
+      document.getElementById("nav-links").classList.toggle("active");
+    });
 
-function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
-  }
+    // Card Animation on Scroll
+    const cards = document.querySelectorAll('.service-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target); // Stop observing once animated
+        }
+      });
+    }, {
+      threshold: 0.15 // Adjust how early animation triggers
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  });
 // book a meeting
 
 document.addEventListener('DOMContentLoaded', () => {

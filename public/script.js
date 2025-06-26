@@ -530,6 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const isLocal = window.location.hostname === 'localhost';
 const socket = io(isLocal ? 'http://localhost:5000' : window.location.origin);
 
+
   let userId = localStorage.getItem('userId');
   let userName = localStorage.getItem('userName');
 

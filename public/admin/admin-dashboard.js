@@ -1,4 +1,4 @@
-// Escape HTML helper to prevent injection
+// === Helper Functions ===
 function escapeHtml(text) {
   if (!text) return '';
   return text
@@ -9,14 +9,12 @@ function escapeHtml(text) {
     .replace(/'/g, "&#039;");
 }
 
-// Show messages
 function showMessage(msg, type = 'success') {
   const box = document.getElementById('messageBox');
   box.innerHTML = `<p class="message ${type}">${escapeHtml(msg)}</p>`;
   setTimeout(() => { box.innerHTML = ''; }, 5000);
 }
 
-// Clear messages and form container
 function clearMessages() {
   document.getElementById('messageBox').innerHTML = '';
 }
@@ -24,57 +22,22 @@ function clearForm() {
   document.getElementById('formContainer').innerHTML = '';
 }
 
-// Load contact messages into table
-async function loadContactMessages() {
-  const table = document.querySelector('#contactMessagesTable tbody');
-  if (!table) return; // Skip if table not present
-  table.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
-
-  try {
-    const response = await fetch('/api/contact');
-    const messages = await response.json();
-
-    if (!messages.length) {
-      table.innerHTML = '<tr><td colspan="4">No messages yet.</td></tr>';
-      return;
-    }
-
-    table.innerHTML = messages.map(msg => `
-      <tr>
-        <td>${escapeHtml(msg.name)}</td>
-        <td>${escapeHtml(msg.email)}</td>
-        <td>${escapeHtml(msg.message)}</td>
-        <td>${new Date(msg.submittedAt).toLocaleString()}</td>
-      </tr>
-    `).join('');
-  } catch (err) {
-    table.innerHTML = '<tr><td colspan="4">Failed to load messages.</td></tr>';
-  }
-}
-
-// Load dashboard chart data and render charts
+// === Dashboard Charts ===
 async function loadDashboardCharts() {
   const token = localStorage.getItem('token');
   const lineChartEl = document.getElementById('lineChart');
   const pieChartEl = document.getElementById('pieChart');
-
   if (!lineChartEl || !pieChartEl) return;
 
   try {
     const response = await fetch('/api/dashboard/stats', {
       headers: { Authorization: `Bearer ${token}` }
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const data = await response.json();
-    console.log('Chart Data:', data);
-
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    // Clear existing chart instances if you want (optional)
     if (window.lineChartInstance) window.lineChartInstance.destroy();
     if (window.pieChartInstance) window.pieChartInstance.destroy();
 
@@ -108,9 +71,7 @@ async function loadDashboardCharts() {
           backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
         }]
       },
-      options: {
-        responsive: true
-      }
+      options: { responsive: true }
     });
 
   } catch (err) {
@@ -118,35 +79,56 @@ async function loadDashboardCharts() {
   }
 }
 
-// Main logic after DOM is loaded
+// === Load Messages ===
+async function loadContactMessages() {
+  const table = document.querySelector('#contactMessagesTable tbody');
+  if (!table) return;
+  table.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+  try {
+    const response = await fetch('/api/contact');
+    const messages = await response.json();
+
+    if (!messages.length) {
+      table.innerHTML = '<tr><td colspan="4">No messages yet.</td></tr>';
+      return;
+    }
+
+    table.innerHTML = messages.map(msg => `
+      <tr>
+        <td>${escapeHtml(msg.name)}</td>
+        <td>${escapeHtml(msg.email)}</td>
+        <td>${escapeHtml(msg.message)}</td>
+        <td>${new Date(msg.submittedAt).toLocaleString()}</td>
+      </tr>
+    `).join('');
+  } catch (err) {
+    table.innerHTML = '<tr><td colspan="4">Failed to load messages.</td></tr>';
+  }
+}
+
+// === Main Logic ===
 document.addEventListener('DOMContentLoaded', () => {
   const user = JSON.parse(localStorage.getItem('user'));
-
-  // Check login & admin role
   if (!user || user.role !== 'admin') {
     alert('Access denied! Redirecting to login.');
     window.location.href = '/login.html';
     return;
   }
 
-  // Show welcome message
   const welcomeMsg = document.getElementById('welcomeMsg');
   if (welcomeMsg) {
     welcomeMsg.textContent = `Welcome, ${user.name}`;
   }
 
-  // Load profile avatar if available
   const avatar = document.getElementById('profileAvatar');
   const dropdown = document.getElementById('profileDropdown');
   const storedProfile = JSON.parse(localStorage.getItem('adminSettings') || '{}');
-
   if (avatar && storedProfile.profilePic) {
     avatar.src = storedProfile.profilePic;
-
     avatar.addEventListener('click', () => {
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
-
     window.addEventListener('click', (e) => {
       if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
         dropdown.style.display = 'none';
@@ -154,16 +136,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Logout
+  // Responsive menu toggle
+  const toggleBtn = document.getElementById('toggleMenuBtn');
+  const sidebar = document.getElementById('sidebar');
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  }
+
+  // === ✅ Proper Logout Handler (not tied to socket) ===
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       localStorage.clear();
       window.location.href = '../index.html';
     });
   }
 
-  // Dashboard button logic
+  // Dashboard nav reset logic
   const dashboardNav = document.getElementById('navDashboard');
   if (dashboardNav) {
     dashboardNav.addEventListener('click', () => {
@@ -188,33 +180,28 @@ document.addEventListener('DOMContentLoaded', () => {
           <div id="formContainer"></div>
           <div id="messageBox"></div>
         `;
-        loadDashboardCharts(); // Re-initialize charts when switching back to dashboard
+        loadDashboardCharts();
       }
     });
   }
 
-  // Initial loads
   loadContactMessages();
-  loadDashboardCharts(); // Load charts on first load
+  loadDashboardCharts();
 });
 
 
+// === ✅ Chatbot socket.io logic (unchanged) ===
+const socket = io('http://localhost:5000'); // or use your live backend
 
-//for chatbot
+window.addEventListener('DOMContentLoaded', () => {
+  socket.emit('adminLogin');
+});
 
-const socket = io('http://localhost:5000'); // Update if using a different port
+window.addEventListener('beforeunload', () => {
+  socket.emit('adminLogout');
+});
 
-  // Notify backend that admin is online
-  window.addEventListener('DOMContentLoaded', () => {
-    socket.emit('adminLogin');
-  });
-
-  // Notify backend when admin logs out
-  document.getElementById('logoutBtn')?.addEventListener('click', () => {
-    socket.emit('adminLogout');
-  });
-
-  // Also clean up on tab close
-  window.addEventListener('beforeunload', () => {
-    socket.emit('adminLogout');
-  });
+// Optional: also notify on logout button click (chatbot tracking only)
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+  socket.emit('adminLogout');
+});

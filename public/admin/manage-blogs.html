@@ -42,19 +42,21 @@
       border-radius: 8px;
       max-width: 600px;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      position: relative;
     }
     .blog-item img {
       max-width: 100%;
       height: auto;
       border-radius: 4px;
     }
-    .blog-item button {
+    .delete-btn {
       background: crimson;
       color: white;
       border: none;
       padding: 8px;
       cursor: pointer;
       border-radius: 5px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -73,6 +75,7 @@
 
   <div id="blogList"></div>
 
-  <script src="manage-blogs.js"> </script>
+  <!-- External JS without inline handlers -->
+  <script src="manage-blogs.js" defer></script>
 </body>
 </html>

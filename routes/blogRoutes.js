@@ -61,6 +61,38 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// @route   PUT /api/blogs/:id
+// @desc    Update a blog by ID
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content, imageUrl } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid blog ID.' });
+    }
+
+    const updated = await Blog.findByIdAndUpdate(
+      id,
+      {
+        title: title?.trim(),
+        content: content?.trim(),
+        imageUrl: imageUrl?.trim() || ''
+      },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ error: 'Blog not found.' });
+    }
+
+    res.status(200).json(updated);
+  } catch (err) {
+    console.error('Error updating blog:', err);
+    res.status(500).json({ error: 'Server error while updating blog.' });
+  }
+});
+
 // @route   DELETE /api/blogs/:id
 // @desc    Delete a blog by ID
 router.delete('/:id', async (req, res) => {

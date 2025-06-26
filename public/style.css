@@ -1679,6 +1679,7 @@ textarea {
   border-radius: 6px;
   background: #fff;
   transition: border-color 0.3s ease;
+  margin: 8px;
 }
 
 input:focus,

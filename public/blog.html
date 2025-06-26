@@ -5,135 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Midis Blog</title>
   <link rel="icon" type="image/png" href="./image/midis m final logo-03.png">
- 
-<style>
-  /* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: black;
-  color: #f1f1f1;
-  overflow-x: hidden;
-}
 
-/* Animated Header */
-.animated-header {
-  text-align: center;
-  padding: 80px 20px 50px;
- background-color: white;
-  color: black;
-  animation: fadeSlideIn 1s ease forwards;
-}
-.animated-header h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-.animated-header h1 span {
-  background: linear-gradient(to right, #ff8a00, #e52e71);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.animated-header p {
-  font-size: 18px;
-  max-width: 700px;
-  margin: auto;
-  opacity: 0.9;
-}
-
-/* Blog Section */
-.side-blog-section {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  padding: 60px 8%;
-}
-
-/* Blog Card Box */
-.blog-box {
-  display: flex;
-  gap: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  padding: 20px;
-  backdrop-filter: blur(12px);
-  transform: translateY(40px);
-  opacity: 0;
-}
-
-.blog-box img {
-  width: 300px;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-}
-.blog-text {
-  flex: 1;
-}
-.blog-text h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-.blog-text p {
-  color: #ccc;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.blog-text a {
-  text-decoration: none;
-  color: #e100ff;
-  font-weight: bold;
-}
-.blog-text a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .blog-box {
-    flex-direction: column;
-  }
-  .blog-box img {
-    width: 100%;
-    height: 200px;
-  }
-}
-
-/* Animation Keyframes */
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* On Load Animation */
-.fade-in {
-  animation: fadeInCard 1s ease forwards;
-}
-
-@keyframes fadeInCard {
-  0% {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-</style>
+  <style>
+    /* (same styles you had earlier — keeping untouched) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: black;
+      color: #f1f1f1;
+      overflow-x: hidden;
+    }
+    .animated-header {
+      text-align: center;
+      padding: 80px 20px 50px;
+      background-color: white;
+      color: black;
+      animation: fadeSlideIn 1s ease forwards;
+    }
+    .animated-header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .animated-header h1 span {
+      background: linear-gradient(to right, #ff8a00, #e52e71);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .animated-header p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: auto;
+      opacity: 0.9;
+    }
+    .side-blog-section {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      padding: 60px 8%;
+    }
+    .blog-box {
+      display: flex;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      transform: translateY(40px);
+      opacity: 0;
+      animation: fadeInCard 1s ease forwards;
+    }
+    .blog-box img {
+      width: 300px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .blog-text {
+      flex: 1;
+    }
+    .blog-text h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .blog-text p {
+      color: #ccc;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .blog-text a {
+      text-decoration: none;
+      color: #e100ff;
+      font-weight: bold;
+    }
+    .blog-text a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .blog-box {
+        flex-direction: column;
+      }
+      .blog-box img {
+        width: 100%;
+        height: 200px;
+      }
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: translateY(60px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
 
@@ -144,55 +115,11 @@ body {
   </section>
 
   <!-- Blog Section -->
-<section class="side-blog-section">
+  <section class="side-blog-section" id="blogList">
+    <!-- Blogs will be injected here dynamically -->
+  </section>
 
-  <!-- Blog 1: SEO -->
-  <div class="blog-box fade-in">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="SEO Tips">
-    <div class="blog-text">
-      <h2>Top 5 SEO Tricks Every Startup Should Know</h2>
-      <p>SEO is your organic growth engine. In 2025, Google's algorithms focus more than ever on user intent and experience. If your website isn’t optimized for mobile, fast loading, and human-first content — you’re missing out.</p>
-      <p>✅ Focus on EEAT (Experience, Expertise, Authoritativeness, Trust), keyword clusters, internal linking, and schema markup. Tools like Ahrefs, Semrush, and SurferSEO will help track and scale performance effectively.</p>
-      <a href="#">Read Full Guide →</a>
-    </div>
-  </div>
-
-  <!-- Blog 2: Branding -->
-  <div class="blog-box fade-in">
-    <img src="https://media.istockphoto.com/id/1168178663/photo/search-engine-optimization-concept.webp?a=1&b=1&s=612x612&w=0&k=20&c=e1eSxTYwZgc4vEwLLpmPwNPnYhdN2u4Xo1BP1Hb2P_U=" alt="Branding Psychology">
-    <div class="blog-text">
-      <h2>Design Psychology: Branding That Builds Loyalty</h2>
-      <p>Memorable brands are built on emotion, not just logos. Great design taps into psychology: color theory, font choices, shapes, and tone all create subconscious trust signals.</p>
-      <p>✅ Yellow creates excitement, blue builds trust, and minimalist design builds premium appeal. Your logo, social media, and even email headers must feel like *one unified voice* to customers.</p>
-      <a href="#">Explore Branding Tips →</a>
-    </div>
-  </div>
-
-  <!-- Blog 3: AI Tools -->
-  <div class="blog-box fade-in">
-    <img src="https://media.istockphoto.com/id/1515913422/photo/a-data-analyst-using-technology-ai-for-working-tool-for-data-analysis-chatbot-chat-with-ai.webp?a=1&b=1&s=612x612&w=0&k=20&c=XIonETkCfY0bm7016-_98njp9mGXIA_NpsqVTOpVaWY=" alt="AI Tools">
-    <div class="blog-text">
-      <h2>AI Tools Marketers Must Use in 2025</h2>
-      <p>AI has moved from a buzzword to a marketing essential. Whether you're automating customer support, generating high-converting copy, or building entire campaigns — AI is your superpower.</p>
-      <p>✅ Use ChatGPT for automation, Midjourney for image generation, Jasper.ai for fast content creation, and Notion AI for workflow magic. Save time, cut cost, and scale like never before.</p>
-      <a href="#">Discover All Tools →</a>
-    </div>
-  </div>
-
-  <!-- Blog 4: Reels Marketing (New Trending Blog) -->
-  <div class="blog-box fade-in">
-    <img src="https://media.istockphoto.com/id/1409007686/photo/party-and-watching-movies-cinema-online-entertainment-media-on-smartphone-with-popcorn-film.webp?a=1&b=1&s=612x612&w=0&k=20&c=3XuRcMpPPsruObRCLbHvEHpGh9qbt_F5k8ymFrk6vm8=" alt="Reels Marketing">
-    <div class="blog-text">
-      <h2>Crack the Algorithm: Reels & Short Video Marketing</h2>
-      <p>Short-form video is dominating Instagram, YouTube Shorts, and TikTok. Brands are going viral with 15-second edits, trending sounds, and relatable storytelling. You don’t need a studio — just creativity.</p>
-      <p>✅ Use hooks in the first 3 seconds, add captions for silent views, and follow the "problem → payoff → CTA" formula. Tools like CapCut, InShot, and Adobe Express are game changers for editing.</p>
-      <a href="#">Master Reels Strategy →</a>
-    </div>
-  </div>
-
-</section>
-
-
+ <script src="blog.js"> </script>
 
 </body>
 </html>

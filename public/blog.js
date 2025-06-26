@@ -1,12 +1,11 @@
-  async function loadBlogs() {
+    async function loadBlogs() {
       try {
         const res = await fetch('/api/blogs');
         const blogs = await res.json();
-
-        const container = document.getElementById('blogContainer');
+        const container = document.getElementById('blogList');
         container.innerHTML = '';
 
-        blogs.forEach((blog, index) => {
+        blogs.forEach(blog => {
           const title = blog.title || 'Untitled Blog';
           const content = blog.content || '';
           const imageUrl = blog.imageUrl || '/images/fallback.jpg';
@@ -55,7 +54,7 @@
         });
       } catch (error) {
         console.error('Failed to load blogs:', error);
-        document.getElementById('blogContainer').innerHTML =
+        document.getElementById('blogList').innerHTML =
           '<p style="text-align:center;color:red;">Failed to load blogs.</p>';
       }
     }

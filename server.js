@@ -21,6 +21,8 @@ const bookingRoutes = require('./routes/bookingRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const bookCallRoutes = require('./routes/bookCallRoutes');
+const blogRoutes = require('./routes/blogRoutes'); // ✅ Add this if missing
+
 
 // Create Express App & Server
 const app = express();
@@ -35,7 +37,6 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/userAuth', {
@@ -52,16 +53,17 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/messages', chatRoutes);
 app.use('/api/bookcalls', bookCallRoutes);
+app.use('/api/blogs', blogRoutes); // ✅ This mounts /api/blogs route
 
-app.get('/api/test-save', async (req, res) => {
-  const Test = mongoose.model('Test', new mongoose.Schema({ msg: String }));
-  await Test.create({ msg: "Hello MongoDB!" });
-  res.send("✅ Data inserted");
-});
 
 // Health Check
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
+});
+
+// Serve frontend for production and dev (fallback)
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Global Error Handler
@@ -138,8 +140,7 @@ Strict Chatbot Rules:
 2. Do NOT recommend tools/services not offered by Midis Resources.
 3. If unsure, say: "Please contact our admin using the Book a Meeting button."
 4. Respond like a helpful Midis chatbot.
-5. Keep replies short, to the point, and under 2–3 sentences.
-        `;
+5. Keep replies short, to the point, and under 2–3 sentences.`;
 
         const completion = await openai.chat.completions.create({
           model: 'gpt-4o-mini',
@@ -203,8 +204,6 @@ Strict Chatbot Rules:
     }
   });
 });
-
-
 
 // Start Server
 const PORT = process.env.PORT || 5000;

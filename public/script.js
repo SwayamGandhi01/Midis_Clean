@@ -28,25 +28,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // book a meeting
-function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
-  }
-const cards = document.querySelectorAll('.service-card');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        // Optional: Stop observing once animated
-        observer.unobserve(entry.target);
-      }
+document.addEventListener("DOMContentLoaded", function () {
+    // Menu Toggle
+    document.getElementById("menuToggle").addEventListener("click", function () {
+      document.getElementById("nav-links").classList.toggle("active");
     });
-  }, {
-    threshold: 0.15  // Adjust how early animation triggers
-  });
 
-  cards.forEach((card) => {
-    observer.observe(card);
+    // Card Animation on Scroll
+    const cards = document.querySelectorAll('.service-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target); // Stop observing once animated
+        }
+      });
+    }, {
+      threshold: 0.15 // Adjust how early animation triggers
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
   });
  
 // counter
@@ -294,11 +298,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
 
     if (!hasSeenPopup) {
-      // Show the popup after 2 seconds
+      // Show the popup after 5 seconds
       setTimeout(() => {
         const popup = document.getElementById('popup');
         if (popup) popup.style.display = 'flex';
-      }, 2000);
+      }, 5000);
     }
 
     const closePopupBtn = document.getElementById('closePopup');
@@ -522,7 +526,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(err => console.error('Hello API Error:', err));
 
   // chat bot
-  const socket = io('http://localhost:5000'); // Corrected initialization
+ // 🌐 Socket.IO initialization — supports both localhost and production
+const isLocal = window.location.hostname === 'localhost';
+const socket = io(isLocal ? 'http://localhost:5000' : window.location.origin);
 
   let userId = localStorage.getItem('userId');
   let userName = localStorage.getItem('userName');
@@ -697,20 +703,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-window.addEventListener("load", () => {
-  // Show popup every 30 seconds
-  // setInterval(() => {
-  //   document.getElementById("socialPopup").style.display = "flex";
-  // }, 2000); // 30000 = 30 seconds
 
-  // Show popup first time after 5 seconds
-  setTimeout(() => {
-    document.getElementById("socialPopup").style.display = "flex";
-  }, 4000);
-});
-
-function togglePopup() {
-  document.getElementById("socialPopup").style.display = "none";
-}
 
 

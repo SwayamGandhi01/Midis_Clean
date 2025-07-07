@@ -525,109 +525,164 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => console.log(data.message))
     .catch(err => console.error('Hello API Error:', err));
 
+
+    
   // chat bot
  // 🌐 Socket.IO initialization — supports both localhost and production
+// chat bot
+// 🌐 Socket.IO initialization — supports both localhost and production
 const isLocal = window.location.hostname === 'localhost';
 const socket = io(isLocal ? 'http://localhost:5000' : window.location.origin);
 
+let userId = localStorage.getItem('userId');
+let userName = localStorage.getItem('userName');
 
-  let userId = localStorage.getItem('userId');
-  let userName = localStorage.getItem('userName');
+if (!userId) {
+  userId = 'user_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+  localStorage.setItem('userId', userId);
+}
 
-  if (!userId) {
-    userId = 'user_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
-    localStorage.setItem('userId', userId);
-  }
+if (!userName) {
+  userName = prompt('Please enter your name:') || 'Anonymous';
+  localStorage.setItem('userName', userName);
+}
 
-  if (!userName) {
-    userName = prompt('Please enter your name:') || 'Anonymous';
-    localStorage.setItem('userName', userName);
-  }
+const chatPopupBtn = document.getElementById('openChat');
+const chatPopup = document.getElementById('chatPopup');
+const sendBtn = document.getElementById('sendBtn');
+const userMessageInput = document.getElementById('userMessage');
+const messagesBox = document.getElementById('messages');
+const chatStatus = document.getElementById('chatStatus');
+const chatTyping = document.getElementById('chatTyping');
 
-  const chatPopupBtn = document.getElementById('openChat');
-  const chatPopup = document.getElementById('chatPopup');
-  const sendBtn = document.getElementById('sendBtn');
-  const userMessageInput = document.getElementById('userMessage');
-  const messagesBox = document.getElementById('messages');
-  const chatStatus = document.getElementById('chatStatus');
-  const chatTyping = document.getElementById('chatTyping');
+if (chatPopup) {
+  chatPopup.style.display = 'none';
+}
 
-  if (chatPopup) {
-    chatPopup.style.display = 'none'; // Ensure it's hidden on page load
-  }
-
-  // 👋 Toggle Chat
-  if (chatPopupBtn && chatPopup) {
-    chatPopupBtn.addEventListener('click', () => {
-      const isVisible = chatPopup.style.display === 'flex';
-      chatPopup.style.display = isVisible ? 'none' : 'flex';
-      if (!isVisible) {
-        socket.emit('userConnected', { userId, userName });
-      }
-    });
-  }
-
-  // ✉️ Send message
-  sendBtn?.addEventListener('click', sendUserMessage);
-  userMessageInput?.addEventListener('keypress', (e) => {
-    socket.emit('userTyping', { userId, userName });
-    if (e.key === 'Enter') {
-      sendUserMessage();
-      e.preventDefault();
+// 👋 Toggle Chat
+if (chatPopupBtn && chatPopup) {
+  chatPopupBtn.addEventListener('click', () => {
+    const isVisible = chatPopup.style.display === 'flex';
+    chatPopup.style.display = isVisible ? 'none' : 'flex';
+    if (!isVisible) {
+      socket.emit('userJoin', { userId, userName });
     }
   });
+}
 
-  function sendUserMessage() {
-    const message = userMessageInput.value.trim();
-    if (!message) return;
-    socket.emit('userMessage', { userId, userName, message });
-    appendMessage('user', message);
-    userMessageInput.value = '';
+// ✉️ Send message
+sendBtn?.addEventListener('click', sendUserMessage);
+userMessageInput?.addEventListener('keypress', (e) => {
+  socket.emit('userTyping', { userId, userName });
+  if (e.key === 'Enter') {
+    sendUserMessage();
+    e.preventDefault();
+  }
+});
+
+function sendUserMessage() {
+  const message = userMessageInput.value.trim();
+  if (!message) return;
+  socket.emit('userMessage', { userId, userName, message });
+  appendMessage('user', message);
+  userMessageInput.value = '';
+  chatTyping.innerText = '';
+  removeQuickReplies();
+}
+
+// 🧠 Bot Replies (support quick replies)
+socket.on('botReply', (data) => {
+  if (typeof data === 'string') {
+    appendMessage('bot', data);
+  } else {
+    appendMessage('bot', data.message);
+    if (data.quickReplies && Array.isArray(data.quickReplies)) {
+      showQuickReplies(data.quickReplies);
+    }
+  }
+});
+
+socket.on('info', (msg) => appendMessage('system', msg));
+
+socket.on('adminReply', ({ userId: fromId, message }) => {
+  if (fromId === userId) {
+    appendMessage('admin', message);
     chatTyping.innerText = '';
   }
+});
 
-  // 🧠 Replies
-  socket.on('botReply', (msg) => appendMessage('bot', msg));
-  socket.on('info', (msg) => appendMessage('system', msg));
-  socket.on('adminReply', ({ userId: fromId, message }) => {
-    if (fromId === userId) {
-      appendMessage('admin', message);
-      chatTyping.innerText = '';
-    }
+// 🔴 Admin status
+socket.on('adminStatus', (status) => {
+  chatStatus.innerText = status === 'online' ? '🟢 Admin is online' : '🔴 Admin is offline';
+});
+
+// ✍️ Typing indicator
+socket.on('adminTyping', () => {
+  chatTyping.innerText = 'Admin is typing...';
+  clearTimeout(window.typingTimeout);
+  window.typingTimeout = setTimeout(() => {
+    chatTyping.innerText = '';
+  }, 2000);
+});
+
+// 💬 Append message with styles
+function appendMessage(sender, message) {
+  const bubble = document.createElement('div');
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  bubble.classList.add('chat-bubble');
+  if (sender === 'user') bubble.classList.add('user');
+  else if (sender === 'admin') bubble.classList.add('admin');
+  else if (sender === 'system') bubble.classList.add('system');
+  else bubble.classList.add('bot');
+
+  bubble.innerHTML = `
+    <div class="message-text">${message}</div>
+    <div class="time">${time}</div>
+  `;
+
+  messagesBox.appendChild(bubble);
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+}
+
+// ➕ Show Quick Reply Buttons
+function showQuickReplies(quickReplies) {
+  removeQuickReplies();
+
+  const container = document.createElement('div');
+  container.classList.add('quick-replies');
+
+  quickReplies.forEach(reply => {
+    const btn = document.createElement('button');
+    btn.classList.add('quick-reply-btn');
+
+    const label = typeof reply === 'string' ? reply : reply.label;
+    btn.innerText = label;
+
+    btn.onclick = () => {
+      if (typeof reply === 'object' && reply.url) {
+        window.open(reply.url, '_blank');
+      } else {
+        socket.emit('userMessage', { userId, userName, message: label });
+        appendMessage('user', label);
+      }
+      container.remove();
+      userMessageInput.focus();
+    };
+
+    container.appendChild(btn);
   });
 
-  // 🔴 Admin status
-  socket.on('adminStatus', (status) => {
-    chatStatus.innerText = status.online ? '🟢 Admin is online' : '🔴 Admin is offline';
-  });
+  messagesBox.appendChild(container);
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+}
 
-  // ✍️ Typing indicator
-  socket.on('adminTyping', () => {
-    chatTyping.innerText = 'Admin is typing...';
-    clearTimeout(window.typingTimeout);
-    window.typingTimeout = setTimeout(() => {
-      chatTyping.innerText = '';
-    }, 2000);
-  });
+// 🧹 Remove quick replies
+function removeQuickReplies() {
+  const existing = document.querySelector('.quick-replies');
+  if (existing) existing.remove();
+}
 
-  // ⬇️ Append message with styles
-  function appendMessage(sender, message) {
-    const bubble = document.createElement('div');
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    bubble.classList.add('chat-bubble');
-    if (sender === 'user') bubble.classList.add('user');
-    else if (sender === 'admin') bubble.classList.add('admin');
-    else bubble.classList.add('bot');
-
-    bubble.innerHTML = `
-      <div class="message-text">${message}</div>
-      <div class="time">${time}</div>
-    `;
-
-    messagesBox.appendChild(bubble);
-    messagesBox.scrollTop = messagesBox.scrollHeight;
-  }
 
 
 

@@ -25,11 +25,17 @@
       text-align: center;
       color: #4f46e5;
       margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 600px;
     }
 
     thead {
@@ -80,25 +86,88 @@
     .back-link a:hover {
       text-decoration: underline;
     }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .container {
+        padding: 16px;
+        margin: 30px 16px;
+      }
+
+      th, td {
+        padding: 10px 14px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 14px;
+        margin: 20px 12px;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      th, td {
+        padding: 10px;
+      }
+
+      .approve-btn {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+
+      .back-link {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .approve-btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .back-link {
+        margin-top: 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Manage Admin Requests</h1>
 
-    <table id="adminRequestsTable" style="display: none;">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Requested On</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <!-- JS will inject rows here -->
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="adminRequestsTable" style="display: none;">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Requested On</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- JS will inject rows here -->
+        </tbody>
+      </table>
+    </div>
 
     <p id="noRequestsMsg" class="empty-msg">Loading...</p>
 
@@ -107,6 +176,6 @@
     </div>
   </div>
 
- <script src="manage-admin.js"> </script>
+  <script src="manage-admin.js"></script>
 </body>
 </html>

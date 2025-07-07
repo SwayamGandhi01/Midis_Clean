@@ -81,10 +81,19 @@ const onlineUsers = new Map();
 io.on('connection', (socket) => {
   console.log('📡 New socket connected:', socket.id);
 
+  // 🟢 When user joins
   socket.on('userJoin', ({ userId, userName }) => {
     onlineUsers.set(userId, socket.id);
     io.emit('userStatus', { userId, status: 'online' });
     console.log(`🟢 User online: ${userId}`);
+
+    socket.emit('botReply', {
+      message: "Welcome to Midis Resources! How can we help you today?",
+      quickReplies: [
+        { label: "Explore Our Services", url: "https://midis-clean.onrender.com/services.html" },
+        { label: "Contact Support", url: "https://midis-clean.onrender.com/contactus.html" }
+      ]
+    });
   });
 
   socket.on('userTyping', (userId) => {
@@ -96,15 +105,60 @@ io.on('connection', (socket) => {
   socket.on('userMessage', async ({ userId, userName, message }) => {
     const status = await AdminStatus.findOne({});
     const isAdminOnline = status?.online;
-
     const newMsg = await Message.create({ sender: 'user', userId, userName, message });
 
+    const lowerMessage = message.toLowerCase();
+
+    // 🧠 Direct Link Matching
+
+    const isProduction = process.env.NODE_ENV === 'production';
+    const baseUrl = isProduction ? 'https://midis-clean.onrender.com' : 'http://localhost:5000';
+
+    const directLinkTriggers = [
+      { keyword: 'services', label: 'Visit Services Page', url: `${baseUrl}/services.html` },
+      { keyword: 'contact', label: 'Open Contact Page', url: `${baseUrl}/contactus.html` },
+      { keyword: 'about', label: 'See About Us', url: `${baseUrl}/aboutus.html` }
+    ];
+
+    const directMatch = directLinkTriggers.find(trigger => lowerMessage.includes(trigger.keyword));
+    if (directMatch) {
+      socket.emit('botReply', {
+        message: `Click the button below to access the ${directMatch.keyword} page:`,
+        quickReplies: [{ label: directMatch.label, url: directMatch.url }]
+      });
+      return;
+    }
+
+    // 🧠 Custom hardcoded reply for help/contact keywords
+    const helpKeywords = [
+      'connect', 'talk to someone', 'speak to someone', 'need help', 'get in touch', 'support',
+      'customer support', 'contact', 'help me', 'reach out', 'can someone help', 'talk to human',
+      'live agent', 'real person', 'chat with someone', 'talk to support', 'talk with a person',
+      'i need assistance', 'want to speak', 'can i speak', 'can i talk to admin', 'talk with team',
+      'i have a problem', 'i need to contact', 'contact team', 'get support', 'can i talk'
+    ];
+
+    const matched = helpKeywords.some(keyword => lowerMessage.includes(keyword));
+    if (matched) {
+      socket.emit('botReply', {
+        message: "Please fill out our Contact Form to get in touch — our team will reach out shortly.",
+        quickReplies: [
+          { label: "Open Contact Form", url: "https://midis-clean.onrender.com/contactus.html" }
+        ]
+      });
+      return;
+    }
+
+    // 🧠 Admin Online
     if (isAdminOnline && adminSocket) {
       adminSocket.emit('newUserMessage', newMsg);
       socket.emit('info', 'Please wait, admin is online and will get back to you shortly.');
-    } else {
-      try {
-        const systemPrompt = `
+      return;
+    }
+
+    // 🤖 Fallback to OpenAI if admin offline
+    try {
+      const systemPrompt = `
 You are the official chatbot of Midis Resources, a leading digital marketing agency in India, delivering 360° creative and technical solutions to ambitious businesses around the globe.
 
 Company Overview:
@@ -128,35 +182,35 @@ Website Features:
 - "Book a Meeting" button on every page.
 - Contact form for selecting services and submitting queries.
 
-Unique Qualities:
-🌍 Global Reach
-💼 Experienced Team
-🤝 Long-Term Partnership
-📊 Transparent Reporting
-🎯 Customized Funnels
+Direct Links:
+- Services Page: /services.html
+- Contact Page: /contactus.html
+- About Us Page: /aboutus.html
 
 Strict Chatbot Rules:
 1. Only mention the services listed above.
 2. Do NOT recommend tools/services not offered by Midis Resources.
 3. If unsure, say: "Please contact our admin using the Book a Meeting button."
 4. Respond like a helpful Midis chatbot.
-5. Keep replies short, to the point, and under 2–3 sentences.`;
+5. Keep replies short, to the point, and under 2–3 sentences.
+6. If the user asks for the Services, Contact, or About Us page, reply with the correct link from the Direct Links section.
+`;
 
-        const completion = await openai.chat.completions.create({
-          model: 'gpt-4o-mini',
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: message }
-          ],
-        });
 
-        const botReply = completion.choices[0].message.content;
-        await Message.create({ sender: 'bot', userId, message: botReply });
-        socket.emit('botReply', botReply);
-      } catch (error) {
-        console.error('OpenAI API error:', error);
-        socket.emit('botReply', "Sorry, I'm having trouble right now. Please try again later.");
-      }
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message }
+        ],
+      });
+
+      const botReply = completion.choices[0].message.content;
+      await Message.create({ sender: 'bot', userId, message: botReply });
+      socket.emit('botReply', botReply);
+    } catch (error) {
+      console.error('OpenAI API error:', error);
+      socket.emit('botReply', "Sorry, I'm having trouble right now. Please try again later.");
     }
   });
 
@@ -204,6 +258,7 @@ Strict Chatbot Rules:
     }
   });
 });
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

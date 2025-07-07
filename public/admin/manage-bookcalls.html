@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary-color: #111827; /* dark slate */
-      --accent-color: #111827;  /* match header color */
+      --primary-color: #111827;
+      --accent-color: #111827;
       --bg-color: #fefefe;
       --table-bg: #ffffff;
       --alt-row: #f9fafb;
@@ -29,6 +29,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     nav .brand {
@@ -66,10 +67,15 @@
       background-color: #000000;
     }
 
+    .table-container {
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       background: var(--table-bg);
+      min-width: 600px;
     }
 
     th, td {
@@ -88,14 +94,91 @@
       background-color: var(--alt-row);
     }
 
+    @media (max-width: 1024px) {
+      nav {
+        padding: 12px 20px;
+      }
+
+      .container {
+        margin: 30px 20px;
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 1.6em;
+      }
+
+      .btn-refresh {
+        padding: 10px 14px;
+        font-size: 0.95em;
+      }
+
+      table {
+        font-size: 0.95em;
+      }
+    }
+
     @media (max-width: 768px) {
       .container {
-        margin: 20px;
+        margin: 20px 15px;
         padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.4em;
+      }
+
+      nav .brand {
+        font-size: 1.4em;
+      }
+
+      .btn-refresh {
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+
+      th, td {
+        padding: 10px;
       }
 
       table {
         font-size: 0.9em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav .brand {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+      }
+
+      .container {
+        margin: 15px 10px;
+        padding: 12px;
+      }
+
+      h1 {
+        font-size: 1.2em;
+        margin-bottom: 16px;
+      }
+
+      .btn-refresh {
+        width: 100%;
+        font-size: 0.95em;
+        padding: 10px;
+      }
+
+      table {
+        font-size: 0.85em;
+      }
+
+      th, td {
+        padding: 8px;
       }
     }
   </style>
@@ -109,19 +192,21 @@
     <h1>Manage Book Calls</h1>
     <button class="btn-refresh" id="refreshBtn">Refresh List</button>
 
-    <table id="bookcallsTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Contact Number</th>
-          <th>Service</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Book call rows will be inserted here -->
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table id="bookcallsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Service</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Book call rows will be inserted here -->
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script src="manage-bookcalls.js"></script>

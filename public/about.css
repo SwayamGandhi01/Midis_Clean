@@ -128,9 +128,11 @@
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(to right, #ff6a00, #ffb347);
+  color:#FF7518 ;
+/* background-color:#FF7518 ;
+
   -webkit-background-clip: text;
-  color: transparent;
+  color: transparent; */
 }
 
 .hero-content p {
@@ -144,7 +146,7 @@
 .cta-btn {
   display: inline-block;
   margin-top: 20px;
-  background: #ff6a00;
+  background: linear-gradient(90deg, #FF6A00, #FF9472);
   color: white;
   padding: 12px 28px;
   font-size: 1rem;
